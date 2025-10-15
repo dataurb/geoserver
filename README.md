@@ -1,2 +1,2 @@
 # geoserver
-https://rudigeoroo.github.io/geoserver/
+https://dataurb.github.io/geoserver/
