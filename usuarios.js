@@ -2,6 +2,7 @@
 // A chave é o nome de usuário (em minúsculas) e o valor é a senha.
 const usuarios = {
     "dataurb": "admin",
+    "user": "1234",
     "rudi": "geo"
 };
 
