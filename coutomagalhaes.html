@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ribeirãozinho - Dataurb</title>
+    <title>Colonia Couto Magalhães - Dataurb</title>
     <link rel="icon" type="image/png" href="assets/images/icon.png">
     
     <style>
@@ -15,10 +15,9 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            overflow: hidden; /* Evita a barra de rolagem */
+            overflow: hidden;
         }
         
-        /* Oculta o mapa por padrão */
         #mapa-container {
             display: none;
             width: 100%;
@@ -78,7 +77,6 @@
             margin-top: 15px;
         }
 
-        /* Estilos do iframe do mapa */
         iframe {
             width: 100%;
             height: 100%;
@@ -97,31 +95,44 @@
     </div>
 
     <div id="mapa-container">
-        <iframe src="https://app.atlas.co/embeds/0ScYN2l0ZDLRYDcp6sOj" frameborder="0" width="100%" height="600" style="max-width: 100%; border: 1px solid #EAEAEA; border-radius: 4px;"></iframe>
+        <iframe
+            id="iframe-mapa"
+            src=""
+            title="Map"
+            width="100%"
+            height="100%"
+            style="border: 0px;"
+            allow="geolocation"
+            allowfullscreen>
+        </iframe>
     </div>
 
     <script src="usuarios.js"></script>
     
     <script>
-        // Função para realizar o login e exibir o mapa
         function realizarLogin() {
             const usuarioDigitado = document.getElementById("usuario").value.toLowerCase();
             const senhaDigitada = document.getElementById("senha").value;
             const elementoErro = document.getElementById("erro");
 
-            // Verifica as credenciais (usando o objeto do seu arquivo usuarios.js)
+            // Verifica as credenciais
             if (usuarios[usuarioDigitado] && usuarios[usuarioDigitado] === senhaDigitada) {
-                // Se a senha estiver correta, exibe o mapa e oculta o formulário de login
                 elementoErro.textContent = "";
+                
+                // 1. Esconde o login
                 document.getElementById("login-form").style.display = "none";
+                
+                // 2. Mostra o container do mapa
                 document.getElementById("mapa-container").style.display = "block";
+                
+                // 3. AGORA SIM carregamos o mapa. Isso força ele a renderizar no tamanho certo.
+                document.getElementById("iframe-mapa").src = "https://app.atlas.co/embeds/0ScYN2l0ZDLRYDcp6sOj?loc=-52.8381%2C-16.5609%2C14.9529z&public=true";
+
             } else {
-                // Se a senha estiver incorreta, exibe a mensagem de erro
                 elementoErro.textContent = "Usuário ou senha incorretos";
             }
         }
         
-        // Adiciona a funcionalidade de "Enter" no campo de senha
         document.getElementById("senha").addEventListener("keypress", function(event) {
             if (event.key === "Enter") {
                 event.preventDefault();
